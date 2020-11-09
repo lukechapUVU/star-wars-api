@@ -1,1 +1,35 @@
-temp
+body {
+    /* background-color: rgb(0, 120, 200); */
+    background-image: url("stars-background.jpg");
+}
+
+h1 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+figure {
+    align-content: center;
+    display: inline-block;
+    border: 15px ridge silver;
+}
+
+figure img {
+    vertical-align: top;
+}
+
+figcaption {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: yellow;
+    text-align: center;
+    background-color: black;
+}
