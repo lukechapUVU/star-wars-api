@@ -130,7 +130,7 @@ for(let i = 0; i < chronologicalFilmsArr.length; i++) {
     figure.addEventListener("click", function() {
         console.log(chronologicalFilmsArr[i].title);
         let movieTitleUrl = formatMovieTitleUrl(chronologicalFilmsArr[i].title);
-        window.location.replace("http://127.0.0.1:5500/star-wars-api/" + movieTitleUrl);
+        window.location.replace("../star-wars-api/" + movieTitleUrl);
     })
     
     figure.appendChild(figImg);
