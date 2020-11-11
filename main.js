@@ -2,6 +2,7 @@ import {films} from './data/films.js'
 import {people} from './data/people.js'
 
 const main = document.querySelector('main');
+const header = document.querySelector('header');
 
 let chronologicalFilmsArr = [...films];
 
@@ -35,7 +36,7 @@ function insertionSortByDate(arr) {
     }
 }
 
-function formateDate(date) {
+function formatDate(date) {
     var monthName = monthLookup(parseInt(date.substring(5,7)));
     var dateName = "" + monthName + ", " + date.substring(8, 10) + " " + date.substring(0, 4);
     return dateName;
@@ -85,7 +86,7 @@ function monthLookup(monthNum) {
     } 
 }
 
-function formateCharacterList(characterList) {
+function formatCharacterList(characterList) {
     let str = "";
     for(let i = 0; i < characterList.length-1; i++) {
         str += characterList[i] + ", ";
@@ -94,26 +95,44 @@ function formateCharacterList(characterList) {
     return str;
 }
 
+function formatMovieTitleUrl(movieTitle) {
+    movieTitle = movieTitle.toLowerCase();
+    movieTitle = movieTitle.replaceAll(" ", "-");
+    
+    return movieTitle;
+}
+
 insertionSortByDate(chronologicalFilmsArr);
 
-
+let h1 = document.createElement('h1');
+let h3 = document.createElement('h3');
+h1.textContent = "Star Wars API Practice";
+h3.textContent = "Click on an image to view more information about the film";
+header.appendChild(h1);
+header.appendChild(h3);
 
 for(let i = 0; i < chronologicalFilmsArr.length; i++) {
-    let dateName = formateDate(chronologicalFilmsArr[i].release_date);
     let figure = document.createElement('figure');
     let figImg = document.createElement('img');
     let figCaption = document.createElement('figcaption');
+    let announcement = document.createElement('p');
     figImg.src = `https://starwars-visualguide.com/assets/img/films/${i+1}.jpg`
     figCaption.textContent = chronologicalFilmsArr[i].title;
-    let announcement = document.createElement('p');
+    let dateName = formatDate(chronologicalFilmsArr[i].release_date);
     let releaseAnnouncement = "Released in theaters on: " + dateName;
     let characterArr = [];
     for(let j = 0; j < chronologicalFilmsArr[i].characters.length; j++) {
         characterArr.push(characterLookup(chronologicalFilmsArr[i].characters[j]));
     }
-    let characterList = "Starring: " + formateCharacterList(characterArr);
+    let characterList = "Starring: " + formatCharacterList(characterArr);
     announcement.textContent = releaseAnnouncement + "\n\n" + characterList;
-    //console.log(characterList);
+    
+    figure.addEventListener("click", function() {
+        console.log(chronologicalFilmsArr[i].title);
+        let movieTitleUrl = formatMovieTitleUrl(chronologicalFilmsArr[i].title);
+        window.location.replace("http://127.0.0.1:5500/star-wars-api/" + movieTitleUrl);
+    })
+    
     figure.appendChild(figImg);
     figure.appendChild(figCaption);
     main.appendChild(figure);
