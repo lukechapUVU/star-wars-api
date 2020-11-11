@@ -7,6 +7,13 @@ h1 {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    color: yellow;
+}
+
+p {
+    color: yellow;
+    white-space: pre-line;
+    width: 20%;
 }
 
 main {
@@ -19,10 +26,12 @@ figure {
     align-content: center;
     display: inline-block;
     border: 15px ridge silver;
+    width: 20%;
 }
 
 figure img {
     vertical-align: top;
+    width: 100%;
 }
 
 figcaption {
